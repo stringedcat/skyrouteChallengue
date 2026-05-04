@@ -4,6 +4,17 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
+// Add CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend", policy =>
+    {
+        policy.WithOrigins("http://localhost:4200")
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
+});
+
 // TODO: Add FluentValidation
 // builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 
@@ -20,13 +31,15 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
-
-app.UseHttpsRedirection();
+else
+{
+    app.UseHttpsRedirection();
+}
 
 // TODO: Add custom middleware here
 // app.UseMiddleware<ExceptionHandlingMiddleware>();
 
-app.UseAuthorization();
+app.UseCors("AllowFrontend");
 
 app.MapControllers();
 
