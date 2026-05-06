@@ -10,8 +10,8 @@ A flight search & booking platform built with Clean Architecture.
 - Entity Framework Core with SQLite
 - FluentValidation
 
-### Frontend (To be implemented)
-- Angular 18+ with standalone components
+### Frontend
+- Angular 18 with standalone components
 
 ## Architecture
 
@@ -69,15 +69,29 @@ API controllers, middleware, and dependency injection setup.
 
 ```bash
 # Restore packages
-dotnet restore
+dotnet restore backend/SkyRoute.slnx
 
 # Build solution
-dotnet build
+dotnet build backend/SkyRoute.slnx
 
 # Run API
-dotnet run --project src/SkyRoute.Api
+dotnet run --project backend/src/SkyRoute.Api
 ```
 
-## Project Status
+## Project Structure
 
-Initial skeleton created. API contracts and business logic to be implemented.
+```
+skyroute/
+├── backend/
+│   ├── SkyRoute.slnx
+│   └── src/
+│       ├── SkyRoute.Api/
+│       ├── SkyRoute.Application/
+│       ├── SkyRoute.Domain/
+│       └── SkyRoute.Infrastructure/
+└── frontend/
+    └── src/
+        └── app/
+            ├── core/        (models, services, tokens)
+            └── features/    (search, results, booking)
+```
